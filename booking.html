@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Book an Appointment — Lumiere Studio</title>
+<meta name="description" content="Book your appointment at Lumiere Studio. Choose your service, stylist, date and time."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.booking-page-hero{position:relative;height:38vh;min-height:280px;display:flex;align-items:flex-end;overflow:hidden;background:#111}
+.booking-page-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.5)}
+.booking-page-hero__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 60%)}
+.booking-page-hero__content{position:relative;z-index:2;padding:0 2rem 48px;max-width:1280px;margin:0 auto;width:100%}
+.booking-page-hero__bread{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:12px}
+.booking-page-hero__bread a{color:rgba(255,255,255,.45)}
+.booking-page-hero__title{font-family:var(--h-font);font-size:clamp(32px,5vw,60px);font-weight:400;text-transform:uppercase;color:#fff;line-height:1.05}
+.bk-wrap{max-width:1280px;margin:0 auto;padding:60px 2rem 100px;display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:start}
+.bk-progress{background:var(--accent-2);padding:28px 2rem;border-bottom:1px solid var(--border)}
+.bk-progress__inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:0}
+.bk-step{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1}
+.bk-step__num{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--accent-1);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--accent-1);background:#fff;transition:all .3s}
+.bk-step__num.active{background:var(--accent-1);color:#fff}
+.bk-step__num.done{background:var(--accent-1);color:#fff}
+.bk-step__label{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#888;white-space:nowrap}
+.bk-step-line{flex:1;height:1px;background:var(--border);margin-bottom:20px;transition:background .3s}
+.bk-step-line.done{background:var(--accent-1)}
+.bk-panel{display:none}.bk-panel.active{display:block}
+.bk-panel-title{font-family:var(--h-font);font-size:clamp(22px,3vw,32px);font-weight:400;text-transform:uppercase;margin-bottom:8px}
+.bk-panel-title span{font-style:italic;opacity:.6}
+.bk-panel-sub{font-size:14px;color:#666;margin-bottom:32px}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:36px}
+.svc-card{border:1px solid var(--border);padding:24px 20px;cursor:pointer;transition:all .3s;background:#fff}
+.svc-card:hover{border-color:var(--accent-1);transform:translateY(-2px)}
+.svc-card.selected{background:var(--accent-1);color:#fff;border-color:var(--accent-1)}
+.svc-card__name{font-family:var(--h-font);font-size:16px;font-weight:400;margin-bottom:6px}
+.svc-card__price{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;opacity:.7}
+.svc-card__dur{font-size:11px;opacity:.5}
+.stylist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-bottom:36px}
+.stylist-card{border:1px solid var(--border);padding:28px 16px;text-align:center;cursor:pointer;transition:all .3s;background:#fff}
+.stylist-card:hover{border-color:var(--accent-1);transform:translateY(-3px)}
+.stylist-card.selected{background:var(--accent-1);color:#fff;border-color:var(--accent-1)}
+.stylist-card__avatar{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--border);margin:0 auto 14px;background:var(--accent-2);display:flex;align-items:center;justify-content:center;font-family:var(--h-font);font-size:22px;overflow:hidden}
+.stylist-card.selected .stylist-card__avatar{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.1)}
+.stylist-card__name{font-family:var(--h-font);font-size:15px;margin-bottom:4px}
+.stylist-card__role{font-size:11px;opacity:.55;letter-spacing:.5px}
+.cal-wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:36px}
+.calendar{border:1px solid var(--border);padding:24px}
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.cal-month{font-family:var(--h-font);font-size:16px;font-weight:400}
+.cal-nav{width:30px;height:30px;border:1px solid var(--border);background:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.cal-nav:hover{background:var(--accent-1);color:#fff;border-color:var(--accent-1)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-day-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-align:center;color:#888;padding:6px 0}
+.cal-day{font-size:13px;text-align:center;padding:8px 4px;cursor:pointer;border-radius:0;transition:all .2s}
+.cal-day:hover:not(.disabled):not(.empty){background:var(--accent-2)}
+.cal-day.today{font-weight:700;color:var(--accent-1)}
+.cal-day.selected{background:var(--accent-1);color:#fff}
+.cal-day.disabled{opacity:.3;cursor:not-allowed}
+.cal-day.empty{cursor:default}
+.time-slots{border:1px solid var(--border);padding:24px}
+.time-slots-title{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#888;margin-bottom:16px}
+.time-slot{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border:1px solid var(--border);margin-bottom:8px;cursor:pointer;transition:all .2s}
+.time-slot:hover{border-color:var(--accent-1)}
+.time-slot.selected{background:var(--accent-1);color:#fff;border-color:var(--accent-1)}
+.time-slot__avail{font-size:11px;opacity:.6}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.bk-form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:0}
+.bk-form-group label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#888}
+.bk-form-group input,.bk-form-group textarea{border:1px solid var(--border);padding:12px 16px;font-family:var(--b-font);font-size:15px;color:var(--accent-1);background:var(--accent-4);outline:none;transition:border-color .3s;width:100%}
+.bk-form-group input:focus,.bk-form-group textarea:focus{border-color:var(--accent-1)}
+.bk-form-group textarea{resize:vertical;min-height:90px}
+.policy-note{font-size:12px;color:#aaa;line-height:1.7;margin:16px 0 28px}
+.policy-note a{color:var(--accent-1)}
+.conf-table{width:100%;border-collapse:collapse;margin:24px 0}
+.conf-table tr{border-bottom:1px solid var(--border)}
+.conf-table td{padding:13px 0;font-size:14px}
+.conf-table td:first-child{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#888;width:40%}
+.conf-table td:last-child{font-weight:500}
+.bk-actions{display:flex;justify-content:space-between;align-items:center;margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+.bk-btn-back{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#888;background:none;border:none;cursor:pointer;padding:0;transition:color .3s}
+.bk-btn-back:hover{color:var(--accent-1)}
+.bk-summary{background:var(--accent-2);padding:32px;position:sticky;top:100px}
+.bk-summary__title{font-family:var(--h-font);font-size:18px;font-weight:400;text-transform:uppercase;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.bk-summary__item{display:flex;flex-direction:column;gap:4px;padding:14px 0;border-bottom:1px solid var(--border)}
+.bk-summary__label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#888}
+.bk-summary__value{font-size:14px;font-weight:500}
+.bk-summary__total{margin-top:20px;padding-top:20px;border-top:2px solid var(--accent-1)}
+.bk-summary__total-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#888;display:block;margin-bottom:6px}
+.bk-summary__total-value{font-family:var(--h-font);font-size:26px;font-weight:400}
+.bk-summary__note{font-size:11px;color:#aaa;margin-top:16px;line-height:1.7}
+.conf-check{width:60px;height:60px;background:var(--accent-1);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 24px}
+@media(max-width:900px){.bk-wrap{grid-template-columns:1fr}.bk-summary{display:none}.cal-wrap{grid-template-columns:1fr}}
+@media(max-width:600px){.svc-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.bk-step__label{display:none}}
+</style>
+</head>
+<body>
+<header class="site-header" id="site-header">
+<div class="nav-inner">
+<a href="index.html" class="logo">Lumiere Studio</a>
+<nav class="main-nav" id="main-nav" role="navigation" aria-label="Main Navigation">
+<a href="services.html">Services</a><a href="index.html#about">About</a><a href="index.html#team">Our Team</a><a href="index.html#gallery">Gallery</a>
+<a href="booking.html" class="nav-cta" style="opacity:.5">Book Now</a></nav>
+<button class="hamburger" id="hamburger-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</div>
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+<a href="services.html">Services</a><a href="index.html#about">About</a><a href="index.html#team">Our Team</a><a href="index.html#gallery">Gallery</a><a href="booking.html">Book Now</a>
+</div>
+</header>
+<main>
+<header class="booking-page-hero" aria-label="Book appointment">
+<img src="wide angle entrance.png" alt="Lumiere Studio"/>
+<div class="booking-page-hero__overlay"></div>
+<div class="booking-page-hero__content">
+<p class="booking-page-hero__bread"><a href="index.html">Home</a> &nbsp;/&nbsp; Book</p>
+<h1 class="booking-page-hero__title">Book Your Experience</h1>
+</div>
+</header>
+<div class="bk-progress" aria-label="Booking progress">
+<div class="bk-progress__inner">
+<div class="bk-step"><div class="bk-step__num active" id="step-num-1">1</div><span class="bk-step__label">Service</span></div>
+<div class="bk-step-line" id="line-1"></div>
+<div class="bk-step"><div class="bk-step__num" id="step-num-2">2</div><span class="bk-step__label">Stylist</span></div>
+<div class="bk-step-line" id="line-2"></div>
+<div class="bk-step"><div class="bk-step__num" id="step-num-3">3</div><span class="bk-step__label">Date &amp; Time</span></div>
+<div class="bk-step-line" id="line-3"></div>
+<div class="bk-step"><div class="bk-step__num" id="step-num-4">4</div><span class="bk-step__label">Your Details</span></div>
+<div class="bk-step-line" id="line-4"></div>
+<div class="bk-step"><div class="bk-step__num" id="step-num-5">5</div><span class="bk-step__label">Confirm</span></div>
+</div>
+</div>
+<div class="bk-wrap booking-form-wrap">
+<div>
+<!-- STEP 1 -->
+<div class="bk-panel active" data-step="1">
+<h2 class="bk-panel-title">Select Your <span>Service</span></h2>
+<p class="bk-panel-sub">Choose the service you'd like to book</p>
+<div class="svc-grid">
+<div class="svc-card" data-name="Cuts &amp; Styling" data-price="From £45"><div class="svc-card__name">Cuts &amp; Styling</div><div class="svc-card__price">From £45</div><div class="svc-card__dur">45 – 75 min</div></div>
+<div class="svc-card" data-name="Colour &amp; Highlights" data-price="From £80"><div class="svc-card__name">Colour &amp; Highlights</div><div class="svc-card__price">From £80</div><div class="svc-card__dur">2 – 4 hours</div></div>
+<div class="svc-card" data-name="Skincare &amp; Facials" data-price="From £60"><div class="svc-card__name">Skincare &amp; Facials</div><div class="svc-card__price">From £60</div><div class="svc-card__dur">45 – 90 min</div></div>
+<div class="svc-card" data-name="Keratin Treatment" data-price="From £120"><div class="svc-card__name">Keratin Treatment</div><div class="svc-card__price">From £120</div><div class="svc-card__dur">2 – 3 hours</div></div>
+<div class="svc-card" data-name="Nail Art &amp; Manicures" data-price="From £35"><div class="svc-card__name">Nail Art &amp; Manicures</div><div class="svc-card__price">From £35</div><div class="svc-card__dur">45 – 60 min</div></div>
+<div class="svc-card" data-name="Brows &amp; Lashes" data-price="From £25"><div class="svc-card__name">Brows &amp; Lashes</div><div class="svc-card__price">From £25</div><div class="svc-card__dur">30 – 45 min</div></div>
+<div class="svc-card" data-name="Bridal Styling" data-price="From £200"><div class="svc-card__name">Bridal Styling</div><div class="svc-card__price">From £200</div><div class="svc-card__dur">2 – 4 hours</div></div>
+</div>
+<div class="bk-actions"><span></span><button class="btn btn-primary booking-btn-next"><span>Continue →</span></button></div>
+</div>
+<!-- STEP 2 -->
+<div class="bk-panel" data-step="2">
+<h2 class="bk-panel-title">Choose Your <span>Stylist</span></h2>
+<p class="bk-panel-sub">Select a stylist or leave it to us</p>
+<div class="stylist-grid">
+<div class="stylist-card" data-name="No Preference"><div class="stylist-card__avatar">✦</div><div class="stylist-card__name">No Preference</div><div class="stylist-card__role">Best available</div></div>
+<div class="stylist-card" data-name="Sophie Laurent"><div class="stylist-card__avatar">S</div><div class="stylist-card__name">Sophie Laurent</div><div class="stylist-card__role">Creative Director</div></div>
+<div class="stylist-card" data-name="Marcus Chen"><div class="stylist-card__avatar">M</div><div class="stylist-card__name">Marcus Chen</div><div class="stylist-card__role">Senior Stylist</div></div>
+<div class="stylist-card" data-name="Isabelle Moreau"><div class="stylist-card__avatar">I</div><div class="stylist-card__name">Isabelle Moreau</div><div class="stylist-card__role">Beauty Specialist</div></div>
+</div>
+<div class="bk-actions"><button class="bk-btn-back">← Back</button><button class="btn btn-primary booking-btn-next"><span>Continue →</span></button></div>
+</div>
+<!-- STEP 3 -->
+<div class="bk-panel" data-step="3">
+<h2 class="bk-panel-title">Select <span>Date &amp; Time</span></h2>
+<p class="bk-panel-sub">Choose your preferred appointment slot</p>
+<div class="cal-wrap">
+<div class="calendar">
+<div class="cal-header"><button class="cal-nav" id="cal-prev">←</button><span class="cal-month" id="calendar-month"></span><button class="cal-nav" id="cal-next">→</button></div>
+<div class="cal-grid" id="calendar-grid"></div>
+</div>
+<div class="time-slots">
+<div class="time-slots-title">Available Times</div>
+<div class="time-slot" data-time="9:00 AM"><span>9:00 AM</span><span class="time-slot__avail">Available</span></div>
+<div class="time-slot" data-time="10:00 AM"><span>10:00 AM</span><span class="time-slot__avail">Available</span></div>
+<div class="time-slot" data-time="11:00 AM"><span>11:00 AM</span><span class="time-slot__avail">Available</span></div>
+<div class="time-slot" data-time="12:00 PM"><span>12:00 PM</span><span class="time-slot__avail">Available</span></div>
+<div class="time-slot" data-time="1:00 PM"><span>1:00 PM</span><span class="time-slot__avail">Available</span></div>
+<div class="time-slot" data-time="2:00 PM"><span>2:00 PM</span><span class="time-slot__avail">Available</span></div>
+<div class="time-slot" data-time="3:00 PM"><span>3:00 PM</span><span class="time-slot__avail">Available</span></div>
+<div class="time-slot" data-time="4:00 PM"><span>4:00 PM</span><span class="time-slot__avail">Available</span></div>
+<div class="time-slot" data-time="5:00 PM"><span>5:00 PM</span><span class="time-slot__avail">Available</span></div>
+</div>
+</div>
+<div class="bk-actions"><button class="bk-btn-back">← Back</button><button class="btn btn-primary booking-btn-next"><span>Continue →</span></button></div>
+</div>
+<!-- STEP 4 -->
+<div class="bk-panel" data-step="4">
+<h2 class="bk-panel-title">Your <span>Details</span></h2>
+<p class="bk-panel-sub">How should we reach you?</p>
+<div class="form-grid">
+<div class="bk-form-group"><label for="bk-name">Full Name *</label><input id="bk-name" type="text" placeholder="Your full name" autocomplete="name" required/></div>
+<div class="bk-form-group"><label for="bk-email">Email Address *</label><input id="bk-email" type="email" placeholder="your@email.com" autocomplete="email" required/></div>
+<div class="bk-form-group"><label for="bk-phone">Phone Number</label><input id="bk-phone" type="tel" placeholder="+44 7700 000000" autocomplete="tel"/></div>
+<div class="bk-form-group"><label for="bk-how">How did you hear about us?</label><input id="bk-how" type="text" placeholder="Instagram, referral, etc."/></div>
+</div>
+<div class="bk-form-group" style="margin-bottom:0"><label for="bk-notes">Additional Notes</label><textarea id="bk-notes" placeholder="Any specific requests, hair concerns, or questions for your stylist…"></textarea></div>
+<p class="policy-note">By continuing, you agree to our <a href="#">cancellation policy</a>. Appointments cancelled with less than 24 hours notice may incur a fee.</p>
+<div class="bk-actions"><button class="bk-btn-back">← Back</button><button class="btn btn-primary booking-btn-next"><span>Review Booking →</span></button></div>
+</div>
+<!-- STEP 5 -->
+<div class="bk-panel" data-step="5">
+<div id="conf-inner">
+<h2 class="bk-panel-title">Review Your <span>Booking</span></h2>
+<p class="bk-panel-sub" style="margin-bottom:24px">Please confirm the details below before finalising</p>
+<table class="conf-table">
+<tr><td>Service</td><td id="conf-service">—</td></tr>
+<tr><td>Stylist</td><td id="conf-stylist">—</td></tr>
+<tr><td>Date</td><td id="conf-date">—</td></tr>
+<tr><td>Time</td><td id="conf-time">—</td></tr>
+<tr><td>Name</td><td id="conf-name">—</td></tr>
+<tr><td>Email</td><td id="conf-email">—</td></tr>
+<tr><td>Total (est.)</td><td id="conf-total" style="font-weight:700">—</td></tr>
+</table>
+<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:36px">A deposit may be required to secure your booking. You will receive a confirmation email at the address provided. We look forward to welcoming you to Lumiere Studio.</p>
+<div class="bk-actions"><button class="bk-btn-back">← Edit Booking</button><button class="btn btn-primary" id="confirm-booking-btn"><span>Confirm Booking ✓</span></button></div>
+</div>
+</div>
+</div>
+<!-- SIDEBAR -->
+<aside class="bk-summary" aria-label="Booking summary">
+<div class="bk-summary__title">Your Booking Summary</div>
+<div class="bk-summary__item"><span class="bk-summary__label">Service</span><span class="bk-summary__value" id="summary-service">Not selected</span></div>
+<div class="bk-summary__item"><span class="bk-summary__label">Stylist</span><span class="bk-summary__value" id="summary-stylist">Not selected</span></div>
+<div class="bk-summary__item"><span class="bk-summary__label">Date</span><span class="bk-summary__value" id="summary-date">Not selected</span></div>
+<div class="bk-summary__item"><span class="bk-summary__label">Time</span><span class="bk-summary__value" id="summary-time">Not selected</span></div>
+<div class="bk-summary__total"><span class="bk-summary__total-label">Estimated Total</span><span class="bk-summary__total-value" id="summary-total">—</span></div>
+<p class="bk-summary__note">Final pricing confirmed after consultation. A 20% deposit required to secure your appointment.</p>
+</aside>
+</div>
+</main>
+<footer class="site-footer" id="site-footer">
+<div class="footer-inner">
+<div class="footer-brand"><p class="footer-logo">Lumiere Studio</p><p class="footer-tagline">Where beauty meets craftsmanship.</p><div class="social-links"><a href="#" aria-label="Instagram" class="social-link">IG</a><a href="#" aria-label="Facebook" class="social-link">FB</a><a href="#" aria-label="TikTok" class="social-link">TK</a></div></div>
+<div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Cuts &amp; Styling</a></li><li><a href="services.html">Colour</a></li><li><a href="services.html">Skincare</a></li><li><a href="services.html">Keratin</a></li><li><a href="services.html">Nails</a></li></ul></div>
+<div class="footer-col"><h4>Studio</h4><ul><li><a href="index.html#about">Our Story</a></li><li><a href="index.html#team">Meet the Team</a></li><li><a href="index.html#gallery">Gallery</a></li></ul></div>
+<div class="footer-col"><h4>Hours</h4><ul class="hours-list"><li><span>Mon–Fri</span><span>9am – 7pm</span></li><li><span>Saturday</span><span>9am – 7pm</span></li><li><span>Sunday</span><span>10am – 5pm</span></li></ul></div>
+</div>
+<div class="footer-bottom"><p>&copy; 2024 Lumiere Studio. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+</footer>
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>

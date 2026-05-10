@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Lumière Studio</title>
+  <meta name="description" content="Explore the full range of premium hair and beauty services at Lumière Studio — cuts, colour, skincare, keratin, nails, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── PAGE HERO ── */
+    .page-hero {
+      position: relative;
+      height: 55vh;
+      min-height: 380px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: #111;
+    }
+    .page-hero__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.55);
+    }
+    .page-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 60%);
+    }
+    .page-hero__content {
+      position: relative;
+      z-index: 2;
+      padding: 0 2rem 56px;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .page-hero__breadcrumb {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 14px;
+    }
+    .page-hero__breadcrumb a { color: rgba(255,255,255,0.5); }
+    .page-hero__breadcrumb a:hover { color: #fff; }
+    .page-hero__title {
+      font-family: var(--h-font);
+      font-size: clamp(38px, 6vw, 72px);
+      font-weight: 400;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.05;
+    }
+
+    /* ── MISSION STRIP ── */
+    .services-mission {
+      padding: 80px 0;
+      background: #fff;
+      text-align: center;
+    }
+    .services-mission__inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .services-mission__quote {
+      font-family: var(--h-font);
+      font-style: italic;
+      font-size: clamp(20px, 3vw, 32px);
+      color: var(--accent-1);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .services-mission__body {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.9;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .gold-rule {
+      width: 80px;
+      height: 1px;
+      background: var(--accent-1);
+      margin: 32px auto;
+      opacity: 0.3;
+    }
+
+    /* ── SERVICES DETAILED ── */
+    .services-full {
+      padding: 80px 0;
+      background: var(--accent-3);
+    }
+    .services-full-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 56px;
+    }
+    .service-full-card {
+      background: #fff;
+      padding: 48px 44px;
+      transition: background var(--transition);
+    }
+    .service-full-card:hover { background: var(--accent-2); }
+    .service-full-card__icon {
+      font-size: 28px;
+      opacity: 0.35;
+      margin-bottom: 22px;
+    }
+    .service-full-card__name {
+      font-family: var(--h-font);
+      font-size: 22px;
+      font-weight: 400;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .service-full-card__price {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-1);
+      margin-bottom: 16px;
+    }
+    .service-full-card__desc {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .service-full-card__includes {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .service-full-card__includes li {
+      font-size: 13px;
+      color: #666;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .service-full-card__includes li::before {
+      content: '—';
+      opacity: 0.4;
+      flex-shrink: 0;
+    }
+
+    /* ── VALUES ── */
+    .values-section {
+      padding: 80px 0;
+      background: var(--accent-1);
+      color: #fff;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .value-block {
+      padding: 48px 36px;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: background var(--transition);
+    }
+    .value-block:hover { background: rgba(255,255,255,0.05); }
+    .value-block__icon {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      color: rgba(255,255,255,0.7);
+    }
+    .value-block__name {
+      font-family: var(--h-font);
+      font-size: 18px;
+      font-weight: 400;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      color: #fff;
+    }
+    .value-block__desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.85;
+    }
+
+    /* ── GALLERY STRIP ── */
+    .sg-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: 340px;
+    }
+    .sg-gallery__item {
+      position: relative;
+      overflow: hidden;
+    }
+    .sg-gallery__item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .sg-gallery__item:hover img { transform: scale(1.06); }
+    .sg-gallery__label {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .sg-gallery__item:hover .sg-gallery__label { opacity: 1; }
+
+    /* ── FINAL CTA ── */
+    .services-cta-section {
+      padding: 100px 20px;
+      text-align: center;
+      background: var(--accent-4);
+    }
+    .services-cta-section .section-eyebrow { margin-bottom: 16px; display: block; }
+    .services-cta-section .section-title { margin-bottom: 20px; }
+    .services-cta-section p {
+      font-size: 16px;
+      color: #555;
+      max-width: 520px;
+      margin: 0 auto 40px;
+    }
+
+    @media (max-width: 900px) {
+      .services-full-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+      .sg-gallery { grid-template-columns: 1fr 1fr; height: auto; }
+      .sg-gallery__item { height: 200px; }
+    }
+    @media (max-width: 600px) {
+      .sg-gallery { grid-template-columns: 1fr; }
+      .sg-gallery__item { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <header class="site-header" id="site-header">
+    <div class="nav-inner">
+      <a href="index.html" class="logo" id="logo-link">Lumière Studio</a>
+      <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main Navigation">
+        <a href="services.html" id="nav-services" style="opacity:.5;">Services</a>
+        <a href="index.html#about" id="nav-about">About</a>
+        <a href="index.html#team" id="nav-team">Our Team</a>
+        <a href="index.html#gallery" id="nav-gallery">Gallery</a>
+        <a href="booking.html" id="nav-book" class="nav-cta">Book Now</a>
+      </nav>
+      <button class="hamburger" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <a href="services.html" id="m-nav-services">Services</a>
+      <a href="index.html#about" id="m-nav-about">About</a>
+      <a href="index.html#team" id="m-nav-team">Our Team</a>
+      <a href="index.html#gallery" id="m-nav-gallery">Gallery</a>
+      <a href="booking.html" id="m-nav-book">Book Now</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- PAGE HERO -->
+    <header class="page-hero" aria-label="Services">
+      <img src="side view work area.png" alt="Lumière Studio interior" class="page-hero__img" />
+      <div class="page-hero__overlay"></div>
+      <div class="page-hero__content">
+        <p class="page-hero__breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Services</p>
+        <h1 class="page-hero__title">Our Services</h1>
+      </div>
+    </header>
+
+    <!-- MISSION -->
+    <section class="services-mission" aria-label="Our philosophy">
+      <div class="services-mission__inner">
+        <div class="gold-rule"></div>
+        <p class="services-mission__quote reveal delay-1">
+          "We believe every visit should leave you feeling <em style="font-style:italic;">more yourself</em> — elevated, cared for, and confident."
+        </p>
+        <div class="gold-rule"></div>
+        <p class="services-mission__body reveal delay-2">
+          At Lumière Studio, every service is an experience. From your first consultation to the moment you leave our chair, our team of specialists is dedicated to delivering results that are precise, personal, and lasting. We use only premium products and continuously invest in education to bring you the very best.
+        </p>
+      </div>
+    </section>
+
+    <!-- SERVICES DETAIL GRID -->
+    <section class="services-full" aria-label="Full service menu">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">What We Offer</p>
+          <h2 class="section-title">Beautiful Results,<br/>Every Visit</h2>
+        </div>
+        <div class="services-full-grid">
+
+          <div class="service-full-card reveal">
+            <div class="service-full-card__icon">✂</div>
+            <h3 class="service-full-card__name">Cuts &amp; Styling</h3>
+            <div class="service-full-card__price">From £45</div>
+            <p class="service-full-card__desc">Precision cuts tailored to your face shape, lifestyle, and vision — from classic bobs to contemporary textured styles. Every cut includes a full consultation.</p>
+            <ul class="service-full-card__includes">
+              <li>Women's cut &amp; blowdry — from £45</li>
+              <li>Men's cut &amp; style — from £30</li>
+              <li>Children's cut — from £22</li>
+              <li>Blowdry only — from £28</li>
+            </ul>
+          </div>
+
+          <div class="service-full-card reveal delay-1">
+            <div class="service-full-card__icon">◈</div>
+            <h3 class="service-full-card__name">Colour &amp; Highlights</h3>
+            <div class="service-full-card__price">From £80</div>
+            <p class="service-full-card__desc">Balayage, ombré, full colour, root touch-ups — our colourists craft bespoke shades that complement your natural tone using leading professional colour brands.</p>
+            <ul class="service-full-card__includes">
+              <li>Full colour — from £80</li>
+              <li>Root touch-up — from £55</li>
+              <li>Balayage / ombré — from £120</li>
+              <li>Highlights (full head) — from £95</li>
+            </ul>
+          </div>
+
+          <div class="service-full-card reveal">
+            <div class="service-full-card__icon">◯</div>
+            <h3 class="service-full-card__name">Skincare &amp; Facials</h3>
+            <div class="service-full-card__price">From £60</div>
+            <p class="service-full-card__desc">Hydrating, anti-ageing, and rejuvenating treatments using premium skincare ranges. Tailored to your skin type and concerns for a radiant, healthy glow.</p>
+            <ul class="service-full-card__includes">
+              <li>Express facial — from £60</li>
+              <li>Deep cleanse facial — from £85</li>
+              <li>Anti-ageing treatment — from £110</li>
+              <li>LED light therapy — from £75</li>
+            </ul>
+          </div>
+
+          <div class="service-full-card reveal delay-1">
+            <div class="service-full-card__icon">◇</div>
+            <h3 class="service-full-card__name">Keratin Treatments</h3>
+            <div class="service-full-card__price">From £120</div>
+            <p class="service-full-card__desc">Smooth, frizz-free, salon-fresh hair for months. Our keratin treatments restore shine and manageability, dramatically reducing dry time and styling effort.</p>
+            <ul class="service-full-card__includes">
+              <li>Express keratin — from £120</li>
+              <li>Full keratin treatment — from £180</li>
+              <li>Brazilian blowout — from £160</li>
+            </ul>
+          </div>
+
+          <div class="service-full-card reveal">
+            <div class="service-full-card__icon">◆</div>
+            <h3 class="service-full-card__name">Nail Art &amp; Manicures</h3>
+            <div class="service-full-card__price">From £35</div>
+            <p class="service-full-card__desc">Classic manicures to intricate nail art — treat your hands and feet to luxurious care and colour. Long-lasting gel options available.</p>
+            <ul class="service-full-card__includes">
+              <li>Classic manicure — from £35</li>
+              <li>Gel manicure — from £45</li>
+              <li>Pedicure — from £40</li>
+              <li>Nail art design — from £55</li>
+            </ul>
+          </div>
+
+          <div class="service-full-card reveal delay-1">
+            <div class="service-full-card__icon">⟡</div>
+            <h3 class="service-full-card__name">Brows &amp; Lashes</h3>
+            <div class="service-full-card__price">From £25</div>
+            <p class="service-full-card__desc">Tinting, threading, lamination, and lash lifts — frame your face with perfectly sculpted brows and lashes that enhance your natural features.</p>
+            <ul class="service-full-card__includes">
+              <li>Brow shaping — from £25</li>
+              <li>Brow lamination — from £55</li>
+              <li>Lash lift &amp; tint — from £65</li>
+              <li>Brow &amp; lash tint — from £35</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="values-section" aria-label="Our values">
+      <div class="container">
+        <div class="section-header" style="text-align:center;">
+          <p class="section-eyebrow" style="color:rgba(255,255,255,0.5);">What We Stand For</p>
+          <h2 class="section-title" style="color:#fff;">Our Three Pillars</h2>
+        </div>
+        <div class="values-grid">
+
+          <div class="value-block reveal">
+            <div class="value-block__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 20h18M5 20L3 8l4 4 5-7 5 7 4-4-2 12"/>
+              </svg>
+            </div>
+            <h3 class="value-block__name">Luxury</h3>
+            <p class="value-block__desc">Every element of the Lumière experience is considered. From our premium product selection to our consultation process — luxury is a standard we never compromise.</p>
+          </div>
+
+          <div class="value-block reveal delay-1">
+            <div class="value-block__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3L3 12l3 3M18 3l3 9-3 3M9 21l3-6 3 6M12 3v12"/>
+              </svg>
+            </div>
+            <h3 class="value-block__name">Craftsmanship</h3>
+            <p class="value-block__desc">We are obsessed with technique. Every service is executed by specialists who continually invest in their education — staying at the forefront of industry developments.</p>
+          </div>
+
+          <div class="value-block reveal delay-2">
+            <div class="value-block__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+              </svg>
+            </div>
+            <h3 class="value-block__name">Confidence</h3>
+            <p class="value-block__desc">Hair and beauty are deeply personal. At Lumière, we don't just style — we amplify who you already are. Every client leaves standing taller and radiating confidence.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY STRIP -->
+    <div class="sg-gallery" aria-label="Studio gallery">
+      <div class="sg-gallery__item">
+        <img src="chairs viewed from back.png" alt="Salon chairs" />
+        <span class="sg-gallery__label">The Studio</span>
+      </div>
+      <div class="sg-gallery__item">
+        <img src="coffee area.png" alt="Coffee area" />
+        <span class="sg-gallery__label">Client Lounge</span>
+      </div>
+      <div class="sg-gallery__item">
+        <img src="service_hair.png" alt="Hair styling" />
+        <span class="sg-gallery__label">Hair Styling</span>
+      </div>
+      <div class="sg-gallery__item">
+        <img src="shop entrance.png" alt="Salon entrance" />
+        <span class="sg-gallery__label">Reception</span>
+      </div>
+    </div>
+
+    <!-- FINAL CTA -->
+    <section class="services-cta-section" aria-label="Book now">
+      <p class="section-eyebrow">Ready to Begin?</p>
+      <h2 class="section-title">Book Your Experience</h2>
+      <p>Choose your service, pick your stylist, and select a time that suits you. We'll take care of the rest — your transformation awaits.</p>
+      <a href="booking.html" class="btn btn-primary" id="services-final-cta">Book Appointment</a>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" id="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-logo">Lumière Studio</p>
+        <p class="footer-tagline">Where beauty meets craftsmanship.</p>
+        <div class="social-links">
+          <a href="#" id="social-ig" aria-label="Instagram" class="social-link">IG</a>
+          <a href="#" id="social-fb" aria-label="Facebook" class="social-link">FB</a>
+          <a href="#" id="social-tw" aria-label="TikTok" class="social-link">TK</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Cuts &amp; Styling</a></li>
+          <li><a href="services.html">Colour</a></li>
+          <li><a href="services.html">Skincare</a></li>
+          <li><a href="services.html">Keratin</a></li>
+          <li><a href="services.html">Nails</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="index.html#about">Our Story</a></li>
+          <li><a href="index.html#team">Meet the Team</a></li>
+          <li><a href="index.html#gallery">Gallery</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hours</h4>
+        <ul class="hours-list">
+          <li><span>Monday–Friday</span><span>9am – 7pm</span></li>
+          <li><span>Saturday</span><span>9am – 7pm</span></li>
+          <li><span>Sunday</span><span>10am – 5pm</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Lumière Studio. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>
