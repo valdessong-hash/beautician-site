@@ -400,3 +400,37 @@ html.js [data-rvs].in>*:nth-child(6){transition-delay:.5s}
     transition-duration:.01ms!important}
   html.js [data-rv],html.js [data-rvs]>*{opacity:1!important;transform:none!important}
 }
+
+
+/* ---------- 26. spec panel (replaces the hero-side photo slot) ---------- */
+.spec{border:1px solid var(--hair);padding:clamp(1.5rem,4vw,2.4rem)}
+.spec h3{font-family:var(--sans);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold);font-weight:400;margin-bottom:1.6rem}
+.spec ul{display:grid;gap:0}
+.spec li{display:grid;gap:.2rem;padding:1rem 0;border-top:1px solid var(--hair-soft)}
+.spec li:first-child{border-top:0;padding-top:0}
+.spec li:last-child{padding-bottom:0}
+.spec b{font-family:var(--serif);font-size:1.3rem;color:var(--cream);font-weight:400;line-height:1.2}
+.spec span{font-size:.86rem;color:var(--dim)}
+
+/* ---------- 27. standards trio ---------- */
+.trio{display:grid;gap:0}
+.trio article{padding:2rem 0;border-top:1px solid var(--hair-soft)}
+.trio__n{display:block;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.9rem}
+.trio h3{font-size:1.5rem;margin-bottom:.7rem}
+.trio p{color:var(--dim);font-size:.94rem}
+
+/* ---------- 28. directions + closing call ---------- */
+.dir{border:1px solid var(--hair);padding:clamp(1.5rem,4vw,2.4rem)}
+.dir p{color:var(--stone);margin-bottom:1.8rem}
+.closing{margin-top:1rem;padding:clamp(1.5rem,4vw,2.4rem);
+  border:1px solid var(--hair);text-align:center;
+  background:linear-gradient(170deg,#111010,#000 70%)}
+.closing__q{font-family:var(--serif);font-style:italic;font-size:1.3rem;color:var(--cream);
+  margin:0 auto 1.4rem}
+
+@media (min-width:900px){
+  .trio{grid-template-columns:repeat(3,1fr);gap:2.6rem}
+  .trio article{border-top:1px solid var(--hair);padding:2rem 0 0}
+}
