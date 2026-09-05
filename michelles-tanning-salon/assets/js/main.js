@@ -48,21 +48,5 @@
     if (Number(li.dataset.d) === today) li.classList.add('today');
   });
 
-  /* newsletter — front end only */
-  var form = $('.join form');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var input = $('#em'), msg = $('.msg', form);
-      if (!input.value || input.value.indexOf('@') < 0) {
-        msg.textContent = 'Please enter a valid email address.';
-        input.focus();
-        return;
-      }
-      msg.textContent = 'Thank you — connect this form to your mailing list to receive sign-ups.';
-      form.reset();
-    });
-  }
-
   $$('[data-yr]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
