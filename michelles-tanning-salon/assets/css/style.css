@@ -131,6 +131,19 @@ p{text-wrap:pretty;max-width:62ch}
 .nav__links a:hover{color:var(--cream)}
 .nav__links a:hover::after{transform:scaleX(1)}
 
+.nav__tel{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.74rem;letter-spacing:.16em;color:var(--gold-lt);
+  padding:.5rem .9rem;border:1px solid var(--hair);border-radius:2px;
+  transition:border-color .5s var(--ease),background .5s var(--ease);
+  white-space:nowrap;
+}
+.nav__tel:hover{border-color:var(--gold);background:rgba(201,162,75,.08)}
+.nav__tel svg{width:13px;height:13px;fill:currentColor;flex-shrink:0}
+.nav__tel b{font-weight:400}
+.nav__tel .num{display:none}
+.nav__right{display:flex;align-items:center;gap:.6rem}
+
 .burger{width:44px;height:44px;display:grid;place-content:center;gap:6px}
 .burger span{display:block;width:22px;height:1px;background:var(--cream);
   transition:transform .5s var(--ease),opacity .3s}
@@ -339,17 +352,19 @@ p{text-wrap:pretty;max-width:62ch}
 .ft__fine{font-size:.68rem;color:var(--dim);letter-spacing:.06em;line-height:2}
 
 /* ---------- reveal (bar #6: >=500ms, fade + rise only) ---------- */
-html.js [data-rv]{opacity:0;transform:translateY(22px)}
-[data-rv]{transition:opacity .95s var(--ease),transform .95s var(--ease)}
-[data-rv].in{opacity:1;transform:none}
-html.js [data-rvs]>*{opacity:0;transform:translateY(20px)}
-[data-rvs]>*{transition:opacity .9s var(--ease),transform .9s var(--ease)}
-[data-rvs].in>*{opacity:1;transform:none}
-[data-rvs].in>*:nth-child(2){transition-delay:.1s}
-[data-rvs].in>*:nth-child(3){transition-delay:.2s}
-[data-rvs].in>*:nth-child(4){transition-delay:.3s}
-[data-rvs].in>*:nth-child(5){transition-delay:.4s}
-[data-rvs].in>*:nth-child(6){transition-delay:.5s}
+/* every hide/show pair carries the same html.js prefix, so .in always
+   out-specifies the hiding rule instead of losing to it */
+html.js [data-rv]{opacity:0;transform:translateY(22px);
+  transition:opacity .95s var(--ease),transform .95s var(--ease)}
+html.js [data-rv].in{opacity:1;transform:none}
+html.js [data-rvs]>*{opacity:0;transform:translateY(20px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease)}
+html.js [data-rvs].in>*{opacity:1;transform:none}
+html.js [data-rvs].in>*:nth-child(2){transition-delay:.1s}
+html.js [data-rvs].in>*:nth-child(3){transition-delay:.2s}
+html.js [data-rvs].in>*:nth-child(4){transition-delay:.3s}
+html.js [data-rvs].in>*:nth-child(5){transition-delay:.4s}
+html.js [data-rvs].in>*:nth-child(6){transition-delay:.5s}
 
 /* ---------- breakpoints ---------- */
 @media (min-width:620px){
@@ -362,6 +377,7 @@ html.js [data-rvs]>*{opacity:0;transform:translateY(20px)}
 @media (min-width:900px){
   :root{--nav-h:88px}
   .nav__links{display:flex;gap:2.2rem;align-items:center}
+  .nav__tel .num{display:inline}
   .burger{display:none}
   .sheet{display:none}
   .split{grid-template-columns:1fr 1fr}
