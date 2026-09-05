@@ -42,10 +42,13 @@
     items.forEach(function (el) { io.observe(el); });
   }
 
-  /* today's hours */
+  /* today's hours — table highlight and the hero datum, from one source */
   var today = new Date().getDay();
   $$('.hrs li').forEach(function (li) {
-    if (Number(li.dataset.d) === today) li.classList.add('today');
+    if (Number(li.dataset.d) !== today) return;
+    li.classList.add('today');
+    var slot = $('[data-today]');
+    if (slot) slot.textContent = li.querySelector('b').textContent;
   });
 
   $$('[data-yr]').forEach(function (el) { el.textContent = new Date().getFullYear(); });

@@ -203,17 +203,30 @@ html.js .nav:not(.stuck) .mark{opacity:0;pointer-events:none}
     radial-gradient(58% 40% at 50% 8%,rgba(226,231,244,.09),transparent 62%),
     radial-gradient(70% 50% at 50% 100%,rgba(201,162,75,.13),transparent 68%);
 }
-.hero__tubes{position:absolute;inset:0;display:flex;justify-content:center;gap:clamp(14px,3.4vw,44px);
-  opacity:.5;transform:skewX(-9deg) scale(1.35)}
-.hero__tubes i{display:block;width:2px;height:100%;
-  background:linear-gradient(180deg,transparent,rgba(226,231,244,.42) 22%,rgba(255,255,255,.62) 50%,rgba(226,231,244,.36) 78%,transparent);
-  filter:blur(1.5px);animation:tube 7s ease-in-out infinite}
+.hero__tubes{position:absolute;inset:0;display:flex;justify-content:center;gap:clamp(26px,5vw,64px);
+  opacity:1;transform:skewX(-9deg) scale(1.35)}
+.hero__tubes i{display:block;width:3px;height:100%;
+  background:linear-gradient(180deg,transparent,rgba(226,231,244,.30) 18%,rgba(236,240,250,.52) 50%,rgba(226,231,244,.26) 82%,transparent);
+  filter:blur(.7px);animation:tube 7s ease-in-out infinite}
 .hero__tubes i:nth-child(2n){animation-delay:-2.4s}
 .hero__tubes i:nth-child(3n){animation-delay:-4.1s}
 .hero__vig{position:absolute;inset:0;
-  background:radial-gradient(72% 62% at 50% 44%,transparent 8%,rgba(0,0,0,.72) 62%,#000 100%)}
+  background:linear-gradient(100deg,#000 12%,rgba(0,0,0,.86) 38%,rgba(0,0,0,.42) 72%,rgba(0,0,0,.66) 100%)}
 .hero__in{position:relative;z-index:2;display:grid;justify-items:start;gap:0;
   width:min(100% - (var(--pad)*2),var(--wrap));margin-inline:auto;text-align:left}
+.hero__now{
+  justify-self:start;display:grid;gap:.35rem;
+  margin:2.4rem 0 0;padding-left:1.1rem;border-left:1px solid var(--hair);
+}
+.hero__now-l{font-size:var(--t-label);letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.hero__now-t{font-family:var(--serif);font-size:var(--t-h3);color:var(--cream);font-weight:400;line-height:1}
+.hero__now-s{font-size:var(--t-label);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+@media (min-width:1000px){
+  .hero__in{grid-template-columns:minmax(0,1fr) auto;align-items:end;column-gap:3rem}
+  .hero__in>.mark,.hero__in>h1,.hero__in>.hero__tag,.hero__in>.hero__cta{grid-column:1}
+  .hero__now{grid-column:2;grid-row:1/span 4;align-self:center;justify-self:end;margin:0;
+    text-align:right;padding:0 1.4rem 0 0;border-left:0;border-right:1px solid var(--hair)}
+}
 .hero__mark{margin-bottom:clamp(2rem,5vw,3.2rem)}
 .hero h1{max-width:13ch;margin-bottom:1.6rem}
 .hero__tag{
@@ -231,7 +244,7 @@ html.js .nav:not(.stuck) .mark{opacity:0;pointer-events:none}
   width:min(100% - (var(--pad)*2),var(--wrap));margin-inline:auto;
 }
 
-@keyframes tube{0%,100%{opacity:.4}50%{opacity:.95}}
+@keyframes tube{0%,100%{opacity:.55}50%{opacity:1}}
 
 /* ---------- trust strip ---------- */
 .strip{border-block:1px solid var(--rule);background:var(--panel)}
@@ -305,11 +318,10 @@ html.js .nav:not(.stuck) .mark{opacity:0;pointer-events:none}
 
 /* ---------- know list ---------- */
 .know{display:grid;gap:0;border-top:1px solid var(--hair-soft)}
-.know li{display:grid;grid-template-columns:1.9rem minmax(0,1fr);gap:.45rem 1.1rem;align-items:baseline;
+.know li{display:grid;grid-template-columns:minmax(0,1fr);gap:.45rem 1.1rem;align-items:baseline;
   padding:1.5rem 0;border-bottom:1px solid var(--hair-soft)}
-.know .n{grid-column:1;grid-row:1}
-.know h4{grid-column:2;grid-row:1}
-.know p{grid-column:2;grid-row:2}
+.know h4{grid-column:1;grid-row:1}
+.know p{grid-column:1;grid-row:2}
 .know .n{font-family:var(--serif);font-size:var(--t-body);color:var(--dim);font-style:italic}
 .know h4{font-family:var(--sans);font-size:var(--t-label);letter-spacing:.2em;text-transform:uppercase;
   color:var(--cream);font-weight:400;margin-bottom:.35rem}
@@ -345,7 +357,7 @@ html.js .nav:not(.stuck) .mark{opacity:0;pointer-events:none}
 .ft__soc{display:flex;justify-content:center;gap:.8rem;margin-bottom:1.8rem}
 .ft__soc a{width:42px;height:42px;border:1px solid var(--hair);border-radius:50%;
   display:grid;place-items:center;transition:border-color .5s,transform .5s var(--ease)}
-.ft__soc a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.ft__soc a:hover{transform:translateY(-2px)}
 .ft__soc svg{width:16px;height:16px;fill:var(--stone)}
 .ft__soc a:hover svg{fill:var(--gold)}
 .ft__fine{font-size:var(--t-label);color:var(--dim);letter-spacing:.06em;line-height:2;
@@ -385,10 +397,9 @@ html.js [data-rvs].in>*:nth-child(6){transition-delay:.5s}
     .gal{grid-template-columns:repeat(4,1fr)}
   .price__grid{grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3.4rem);align-items:start}
   .visit{grid-template-columns:1fr 1fr}
-  .know li{grid-template-columns:1.9rem minmax(0,.62fr) minmax(0,1.5fr);gap:1.6rem;align-items:baseline}
-  .know .n{grid-row:1}
-  .know h4{grid-column:2;grid-row:1;margin-bottom:0}
-  .know p{grid-column:3;grid-row:1}
+  .know li{grid-template-columns:minmax(0,.62fr) minmax(0,1.5fr);gap:2.4rem;align-items:baseline}
+  .know h4{grid-column:1;grid-row:1;margin-bottom:0}
+  .know p{grid-column:2;grid-row:1}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -468,3 +479,16 @@ html.js [data-rvs].in>*:nth-child(6){transition-delay:.5s}
 
 /* footer measure: set, not orphaned */
 .ft__fine{max-width:none}
+
+
+/* mobile rhythm: the desktop variation did not carry down */
+@media (max-width:700px){
+  #lounge{padding-block:6rem}
+  .breath{padding-block:8.5rem}
+  #prices{padding-block:7.5rem}
+  #know{padding-block:6.5rem}
+  #visit{padding-block:6rem}
+  .join{padding-block:5rem}
+}
+/* the centred statement's rag needs a tighter measure to taper cleanly */
+.statement{max-width:19ch}
