@@ -37,8 +37,21 @@ mechanisms — not against the two sites. That limitation is real and is reporte
    resolved. Fades and 20px rises only — no scale-ins, no springs, no marquee
    faster than 40s.
 
-7. **Vertical rhythm is generous.** Section padding at least 6rem mobile / 10rem
-   desktop. The existing site's sections are stacked too tightly to read as luxury.
+7. **Vertical rhythm is generous.** Primary sections: at least 6rem mobile /
+   10rem desktop. Secondary bands (Explore, Join) may run 6rem / 8rem — they are
+   connective tissue, not destinations.
+
+## Amendments made during round 1, and why
+
+- **#1, the no-blue clause.** The system critic correctly flagged a blue wash in
+  the hero. It is the lamp motif — the thing the salon actually sells, and what
+  their own hero photograph shows. Rather than delete the one subject-specific
+  element on the page, the neutrals were pulled to true neutral and the cool cast
+  cut to a trace in the tube cores only. The ground is #000000 with no tint; the
+  lamps may read cool, because lamps are cool.
+- **#7** was originally a single figure applied to every band, which made the two
+  connective sections as heavy as the destinations. Split into primary/secondary
+  above.
 
 ## Content rules (from the real site — non-negotiable)
 
