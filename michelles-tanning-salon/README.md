@@ -1,91 +1,81 @@
-# Michelle's Tanning Lounge — Swindon
+# Michelle's Tanning Lounge — michellestanninglounge.co.uk
 
-A static marketing site for Michelle's Tanning Lounge, an independent tanning
-lounge in Swindon, Wiltshire.
+A rebuild of the site for Michelle's Tanning Lounge, Unit 1 The Place,
+Greenbridge Road, Swindon SN3 3JE.
 
-No build step, no dependencies, no framework. Open `index.html` in a browser,
-or drop the folder onto Netlify / GitHub Pages / any host that serves files.
+Static. No build step, no dependencies, no framework.
 
 ```
-python3 -m http.server 8000   # then visit http://localhost:8000
+python3 -m http.server 8000    # then open http://localhost:8000
 ```
 
-## Pages
+## Files
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Homepage — hero, USPs, bed line-up, spray tan, pricing preview, reviews, FAQ, location |
-| `sunbeds.html` | The six beds, session times by skin type, how to get more from a session |
-| `spray-tan.html` | Shade guide, prep, aftercare, spray tan FAQ |
-| `pricing.html` | Minute bundles, spray tan rates, collagen courses, extras, vouchers |
-| `safe-tanning.html` | Skin types, UK sunbed law, contraindications, house rules |
-| `contact.html` | Booking request form, hours, directions, quick answers |
-| `assets/css/style.css` | Whole design system in one file |
-| `assets/js/main.js` | All interactions, ~200 lines of vanilla JS |
+| `index.html` | The whole site — one page, anchored sections |
+| `assets/css/style.css` | Design system: tokens, type scale, components |
+| `assets/js/main.js` | Sticky nav, mobile sheet, reveals, today's hours |
+| `bar.md` | The craft bar this build was judged against |
 
-## Placeholders to replace before this goes live
+## Real content in this build
 
-Search the repo for these — they are the only invented details in the build.
+Everything below came off the existing site and is live in the page:
 
-1. **Phone number** — `01793 000 000` / `tel:+441793000000`. Appears in the
-   header drawer, footer, homepage, contact page and the JSON-LD block.
-   `grep -rn "01793 000 000\|441793000000" .`
-2. **Street address and postcode** — currently "Swindon, Wiltshire" plus a
-   grey note. In `index.html`, `contact.html` and the JSON-LD `address`.
-3. **Opening hours** — 9–8 weekdays, 9–6 Saturday, 10–4 Sunday are assumed.
-   Update the `.hours` lists in the footer of every page, on `contact.html`,
-   and `openingHoursSpecification` in the JSON-LD.
-4. **All prices** — every figure on `pricing.html` and the three cards on
-   `index.html` is an example.
-5. **Reviews** — the three testimonials on `index.html` are labelled as
-   samples. Replace with real Google or Facebook reviews (with permission).
-6. **Bed models** — described generically. Name the actual beds if they are
-   a recognised brand; people search for them by name.
-7. **Domain** — `michellestanninglounge.co.uk` is used in the canonical tags,
-   sitemap and JSON-LD. Swap for the real one.
-8. **Google Maps embed** — two `.map-frame` containers are sized and styled
-   and ready for the iframe.
-9. **Photos** — the site is deliberately image-free and loads instantly on
-   CSS gradients and SVG alone. Real photos of the rooms and beds will lift
-   it further; `assets/img/` is empty and waiting.
+- Address, phone (07777 524148), email, and all seven days of opening hours
+- The full price list — £1/min pay as you go, and both block-booking tiers
+- Member of The Sunbed Association
+- 18+ only, photo ID, bookings in salon only, 12-minute session maximum
+- Greenbridge / East Swindon positioning and the "Turn heads. Tan up." line
 
-## Booking form
+There are **no invented figures** anywhere in this build. No fake reviews, no
+made-up ratings, no placeholder phone number.
 
-`contact.html` has a working front-end form that currently shows a
-confirmation and clears. To actually receive submissions, point it at a
-service — Formspree, Netlify Forms (`<form netlify>`), or your booking
-system's own embed — and delete the `form.addEventListener('submit', …)`
-block near the end of `assets/js/main.js`.
+## The one thing still outstanding: photos and video
 
-## What was built in
+The site's images and video could not be downloaded — `michellestanninglounge.co.uk`
+is blocked by this environment's network policy (403 at the egress proxy), so
+there was no way to pull the media files.
 
-**Mobile.** Mobile-first CSS throughout, fluid type via `clamp()`, 44px+ tap
-targets, a full-screen slide-down nav drawer, and a sticky bottom dock with
-*Call* and *Book* that appears after 420px of scroll — because most tanning
-searches happen on a phone and the two things people want are a phone number
-and a way to book.
+Every image position is therefore a styled slot with a caption naming the shot
+that belongs there. They are designed to look deliberate rather than broken, but
+they are placeholders and the site is not finished until they are filled.
 
-**Motion.** Rotating sun-ray field and drifting glows in the hero, staggered
-line-by-line headline reveal, scroll-triggered reveals via
-`IntersectionObserver`, animated stat counters, a cursor-following glow on
-cards, a USP marquee, a swipeable auto-advancing review slider, an accordion
-FAQ, a scroll progress bar, and a pulsing map pin. Every one of them is
-switched off under `prefers-reduced-motion: reduce`.
+To fill them: save each photo into `assets/img/`, then replace the slot markup
 
-**SEO.** Per-page titles and meta descriptions written around "tanning
-Swindon" intent, canonical tags, Open Graph tags, `HealthAndBeautyBusiness`
-JSON-LD with hours, geo and service catalogue, a sitemap and robots.txt.
+```html
+<div class="slot slot--45">
+  <div class="slot__in">…</div>
+</div>
+```
 
-**Accessibility.** Semantic landmarks, labelled form fields, `aria-current`
-on the active nav item, visible focus rings, `aria-expanded` on the menu
-toggle, decorative elements hidden from screen readers, and text that holds
-contrast against the dark background.
+with
 
-**Trust.** A whole page on tanning safely, including the under-18 rule under
-the Sunbeds (Regulation) Act 2010 and the 0.3 W/m² irradiance limit under
-EN 60335-2-27. Salons that publish this rank better and convert better —
-and it is the content a first-time customer actually looks for.
+```html
+<img class="slot slot--45" src="assets/img/your-photo.jpg" alt="Describe the photo">
+```
 
-## Licence
+The `.slot--45`, `.slot--11` and `.slot--169` classes set the aspect ratios, so
+swapping the element keeps the layout intact. The gallery grid takes eight
+square images; the video slot at the top of "Explore the Salon" takes the
+walkthrough clip.
 
-All copy, markup and styling here is original work written for this site.
+## Verify before launch
+
+- **The price list.** Prices were read off a photograph of the printed card.
+  Check every figure against the real one before this goes live.
+- **The map.** The `.map` container is sized and styled for a Google Maps embed.
+- **The newsletter form** validates and confirms on the front end only. Point it
+  at Mailchimp, Beehiiv or whatever list you use to actually receive sign-ups.
+
+## Design
+
+Metallic gold on true black, taken from the existing wordmark. Cormorant
+Garamond for display, Jost for body and UI, Italianno for the script in the
+logo lockup only. Gold is deliberately scarce — hairlines, small-caps labels and
+a single call to action — so it still reads as gold. Motion is slow and
+resolves in one direction; nothing runs under 500ms, and everything is disabled
+under `prefers-reduced-motion`.
+
+Structured data is `HealthAndBeautyBusiness` JSON-LD with the real address,
+hours, Sunbed Association membership and the full price list as offers.
