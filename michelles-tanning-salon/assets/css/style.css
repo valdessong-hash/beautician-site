@@ -240,11 +240,11 @@ p{text-wrap:pretty}
 
 /* rotating sun rays */
 .hero__rays{
-  position:absolute;top:50%;left:50%;width:150vmax;height:150vmax;
-  transform:translate(-50%,-50%);pointer-events:none;opacity:.22;
+  position:absolute;top:8%;left:74%;width:150vmax;height:150vmax;
+  transform:translate(-50%,-50%);pointer-events:none;opacity:.16;
   background:repeating-conic-gradient(from 0deg,rgba(246,206,126,.5) 0deg 1.1deg,transparent 1.1deg 9deg);
-  -webkit-mask-image:radial-gradient(circle,rgba(0,0,0,.9) 6%,transparent 56%);
-  mask-image:radial-gradient(circle,rgba(0,0,0,.9) 6%,transparent 56%);
+  -webkit-mask-image:radial-gradient(circle,transparent 8%,rgba(0,0,0,.85) 26%,transparent 58%);
+  mask-image:radial-gradient(circle,transparent 8%,rgba(0,0,0,.85) 26%,transparent 58%);
   animation:spin 140s linear infinite;
 }
 .grain{
@@ -280,11 +280,13 @@ p{text-wrap:pretty}
   opacity:0;animation:fadeUp .9s var(--ease-out) .82s forwards;
 }
 .hero__stat b{display:block;font-family:var(--font-display);font-size:clamp(1.6rem,5vw,2.5rem);color:var(--cream);line-height:1}
-.hero__stat span{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.hero__stat span{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);line-height:1.45;display:block}
+@media (min-width:600px){.hero__stat span{font-size:.68rem;letter-spacing:.15em}}
 
 .scroll-hint{
   position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);z-index:3;
   display:none;flex-direction:column;align-items:center;gap:.5rem;
+  pointer-events:none;
   font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
 }
 .scroll-hint i{display:block;width:1px;height:42px;background:linear-gradient(var(--gold),transparent);animation:drop 2.2s ease-in-out infinite}
@@ -674,9 +676,11 @@ p{text-wrap:pretty}
   .burger{display:none}
   .drawer{display:none}
   .dock{display:none}
-  .scroll-hint{display:flex}
   .hero__stats{max-width:560px;gap:1.5rem}
   .quote{padding-inline:4rem}
+}
+@media (min-width:860px) and (min-height:940px){
+  .scroll-hint{display:flex}
 }
 @media (min-width:1100px){
   .cards-3--wide{grid-template-columns:repeat(3,1fr)}
