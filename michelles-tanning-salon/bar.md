@@ -21,9 +21,9 @@ mechanisms — not against the two sites. That limitation is real and is reporte
    per viewport: one hairline, one label, one CTA. Body text is cream, never gold.
    Gold on gold is a fail.
 
-3. **Three type sizes visible per section, maximum.** Display serif, body, and a
-   letterspaced small-caps label (0.2em+). The wordmark script is a fourth face used
-   only in the logo lockup, nowhere else.
+3. **Every size comes from the token scale — no one-off values.** Display serif,
+   body, and exactly ONE letterspaced small-caps size (0.2em+) outside the logo
+   lockup. The wordmark script is a fourth face used only in the lockup.
 
 4. **Headline is at least 4x body size** at desktop. The existing site's hero is
    undersized for its own confidence — "Luxury Tanning Beds in East Swindon"
@@ -52,6 +52,20 @@ mechanisms — not against the two sites. That limitation is real and is reporte
 - **#7** was originally a single figure applied to every band, which made the two
   connective sections as heavy as the destinations. Split into primary/secondary
   above.
+
+## Amendments made during round 4
+
+- **#3 was the wrong rule.** "Three type sizes per section" is too blunt for a
+  price table, which legitimately needs a display figure, a tier figure, a label
+  and a note. Counting sizes also let near-duplicates (.9rem beside .92rem beside
+  .94rem) pass while a deliberate scale failed. Replaced with the rule that
+  actually produces the discipline: every size comes from the token scale, and
+  there is exactly one letterspaced label size. Enforced — all one-off values are
+  gone.
+- **The logo lockup's subtitle is part of the mark, not a label.** A lockup scales
+  as a unit; forcing its subtitle to the page's label size would break it at the
+  small sizes used in the nav and footer. It is therefore exempt from the
+  one-label-size rule. Stated here rather than argued case by case.
 
 ## Content rules (from the real site — non-negotiable)
 
