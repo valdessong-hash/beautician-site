@@ -216,16 +216,20 @@ html.js .nav:not(.stuck) .mark{opacity:0;pointer-events:none}
   width:min(100% - (var(--pad)*2),var(--wrap));margin-inline:auto;text-align:left}
 .hero__now{
   justify-self:start;display:grid;gap:.35rem;
-  margin:2.4rem 0 0;padding-left:1.1rem;border-left:1px solid var(--hair);
+  margin:2.4rem 0 0;padding-left:1.1rem;border-left:1px solid var(--rule);
 }
-.hero__now-l{font-size:var(--t-label);letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
-.hero__now-t{font-family:var(--serif);font-size:var(--t-h3);color:var(--cream);font-weight:400;line-height:1}
+.hero__now-l{font-size:var(--t-label);letter-spacing:.24em;text-transform:uppercase;color:var(--stone)}
+.hero__now-h{display:grid;gap:.3rem;margin:.15rem 0 .55rem}
+.hero__now-h li{display:flex;gap:1.2rem;justify-content:space-between;
+  font-size:var(--t-body);line-height:1.5}
+.hero__now-h span{color:var(--dim)}
+.hero__now-h b{color:var(--cream);font-weight:400;font-variant-numeric:tabular-nums}
 .hero__now-s{font-size:var(--t-label);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 @media (min-width:1000px){
   .hero__in{grid-template-columns:minmax(0,1fr) auto;align-items:end;column-gap:3rem}
   .hero__in>.mark,.hero__in>h1,.hero__in>.hero__tag,.hero__in>.hero__cta{grid-column:1}
   .hero__now{grid-column:2;grid-row:1/span 4;align-self:center;justify-self:end;margin:0;
-    text-align:right;padding:0 1.4rem 0 0;border-left:0;border-right:1px solid var(--hair)}
+    text-align:left;padding:0 0 0 1.4rem;border-right:0;border-left:1px solid var(--rule)}
 }
 .hero__mark{margin-bottom:clamp(2rem,5vw,3.2rem)}
 .hero h1{max-width:13ch;margin-bottom:1.6rem}
@@ -355,8 +359,8 @@ html.js .nav:not(.stuck) .mark{opacity:0;pointer-events:none}
   transition:color .55s var(--ease)}
 .ft__nav a:hover{color:var(--gold)}
 .ft__soc{display:flex;justify-content:center;gap:.8rem;margin-bottom:1.8rem}
-.ft__soc a{width:42px;height:42px;border:1px solid var(--hair);border-radius:50%;
-  display:grid;place-items:center;transition:border-color .5s,transform .5s var(--ease)}
+.ft__soc a{width:42px;height:42px;display:grid;place-items:center;
+  transition:transform .5s var(--ease),opacity .5s}
 .ft__soc a:hover{transform:translateY(-2px)}
 .ft__soc svg{width:16px;height:16px;fill:var(--stone)}
 .ft__soc a:hover svg{fill:var(--gold)}
@@ -469,9 +473,9 @@ html.js [data-rvs].in>*:nth-child(6){transition-delay:.5s}
 
 /* the destination section breathes wider than the connective ones */
 #prices{padding-block:clamp(7rem,15vw,12rem)}
-#lounge{padding-block:clamp(6rem,11vw,8.5rem)}
-#know{padding-block:clamp(6.5rem,12vw,9.5rem)}
-#visit{padding-block:clamp(6rem,11vw,8.5rem)}
+#lounge{padding-block:clamp(6rem,13vw,10rem)}
+#know{padding-block:clamp(6.5rem,14vw,11rem)}
+#visit{padding-block:clamp(6rem,13vw,10rem)}
 .join{padding-block:clamp(6rem,10vw,8rem)}
 
 /* header rides the same gutter as the body */
@@ -488,7 +492,7 @@ html.js [data-rvs].in>*:nth-child(6){transition-delay:.5s}
   #prices{padding-block:7.5rem}
   #know{padding-block:6.5rem}
   #visit{padding-block:6rem}
-  .join{padding-block:5rem}
+  .join{padding-block:6rem}
 }
 /* the centred statement's rag needs a tighter measure to taper cleanly */
 .statement{max-width:19ch}

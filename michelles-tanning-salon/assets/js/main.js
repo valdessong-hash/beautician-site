@@ -42,13 +42,12 @@
     items.forEach(function (el) { io.observe(el); });
   }
 
-  /* today's hours — table highlight and the hero datum, from one source */
+  /* highlight today's row in the hours table. Nothing on the page asserts
+     that the salon is currently open — the hero lists all three ranges
+     statically, so it stays true with JS off and at any hour. */
   var today = new Date().getDay();
   $$('.hrs li').forEach(function (li) {
-    if (Number(li.dataset.d) !== today) return;
-    li.classList.add('today');
-    var slot = $('[data-today]');
-    if (slot) slot.textContent = li.querySelector('b').textContent;
+    if (Number(li.dataset.d) === today) li.classList.add('today');
   });
 
   $$('[data-yr]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
