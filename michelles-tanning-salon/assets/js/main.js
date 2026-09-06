@@ -1,0 +1,54 @@
+(function () {
+  'use strict';
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return [].slice.call((c || document).querySelectorAll(s)); };
+
+  /* sticky nav */
+  var nav = $('.nav');
+  addEventListener('scroll', function () {
+    nav.classList.toggle('stuck', scrollY > 30);
+  }, { passive: true });
+
+  /* mobile sheet */
+  var burger = $('.burger'), sheet = $('.sheet');
+  function setSheet(open) {
+    burger.setAttribute('aria-expanded', String(open));
+    sheet.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', function () {
+    setSheet(burger.getAttribute('aria-expanded') !== 'true');
+  });
+  $$('.sheet a').forEach(function (a) {
+    a.addEventListener('click', function () { setSheet(false); });
+  });
+  addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') setSheet(false);
+  });
+
+  /* reveal */
+  var items = $$('[data-rv],[data-rvs]');
+  if (reduced || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* highlight today's row in the hours table. Nothing on the page asserts
+     that the salon is currently open — the hero lists all three ranges
+     statically, so it stays true with JS off and at any hour. */
+  var today = new Date().getDay();
+  $$('.hrs li').forEach(function (li) {
+    if (Number(li.dataset.d) === today) li.classList.add('today');
+  });
+
+  $$('[data-yr]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+})();
