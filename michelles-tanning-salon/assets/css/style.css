@@ -214,9 +214,14 @@ html.js .nav:not(.stuck) .mark{opacity:0;pointer-events:none}
   background:linear-gradient(100deg,#000 12%,rgba(0,0,0,.86) 38%,rgba(0,0,0,.42) 72%,rgba(0,0,0,.66) 100%)}
 .hero__in{position:relative;z-index:2;display:grid;justify-items:start;gap:0;
   width:min(100% - (var(--pad)*2),var(--wrap));margin-inline:auto;text-align:left}
+.hero__in>.mark{order:1}
+.hero__in>h1{order:2}
+.hero__in>.hero__tag{order:3}
+.hero__in>.hero__cta{order:4}
 .hero__now{
-  justify-self:start;display:grid;gap:.35rem;
-  margin:2.4rem 0 0;padding-left:1.1rem;border-left:1px solid var(--rule);
+  order:5;justify-self:start;display:grid;gap:.35rem;
+  margin:clamp(2.8rem,8vw,3.6rem) 0 0;padding-left:1.1rem;
+  border-left:1px solid var(--rule);
 }
 .hero__now-l{font-size:var(--t-label);letter-spacing:.24em;text-transform:uppercase;color:var(--stone)}
 .hero__now-h{display:grid;gap:.3rem;margin:.15rem 0 .55rem}
